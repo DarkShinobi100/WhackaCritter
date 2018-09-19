@@ -32,13 +32,13 @@ int main()
 	srand(time(NULL));
 
 	//create an instance of our critter class
-	Critter panda;
-	panda.Setup("graphics/panda.png",5);
-
-	//create a second instance of our critter class
-	Critter penguin;
-	penguin.Setup("graphics/penguin.png", 10);
-
+	const int NUM_CRITTERS = 5;
+	Critter critters[NUM_CRITTERS];
+	critters[0].Setup("graphics/panda.png", 5);
+	critters[1].Setup("graphics/penguin.png", 10);
+	critters[2].Setup("graphics/bear.png", 15);
+	critters[3].Setup("graphics/crocodile.png", 20);
+	critters[4].Setup("graphics/elephant.png", 25);
 
 	//game font
 	sf::Font gameFont;
@@ -84,10 +84,10 @@ int main()
 		{
 
 			//process input on critters
-			panda.input(event);
-
-			penguin.input(event);
-
+		    for (int i = 0; i < NUM_CRITTERS; ++i)
+			{
+				critters[i].input(event);
+			}
 
 			if (event.type == sf::Event::Closed)
 				gameWindow.close();
@@ -109,10 +109,11 @@ int main()
 
 
 		//see if there is any pending score
-		score += panda.GetPendingScore();
-		score += penguin.GetPendingScore();
-		panda.ClearPendingScore();
-		penguin.ClearPendingScore();
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			score += critters[i].GetPendingScore();
+			critters[i].ClearPendingScore();
+		}
 		scoreText.setString("Score: " + std::to_string(score));
 
 		//-------------------------------------------------
@@ -129,8 +130,11 @@ int main()
 		gameWindow.clear(sf::Color::Cyan);
 
 		//draw everything
-		panda.Draw(gameWindow);
-		penguin.Draw(gameWindow);
+
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			critters[i].Draw(gameWindow);
+		}
 		gameWindow.draw(scoreText);
 		gameWindow.draw(titleText);
 
