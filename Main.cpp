@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <cstdlib> //gives access to random functions
 #include <ctime> //gives access to time functions
-
+#include <string>//gives access to string funcitons
 
 
 //project inludes
@@ -33,6 +33,29 @@ int main()
 
 	//create an instance of our critter class
 	Critter panda;
+
+	//game font
+	sf::Font gameFont;
+	gameFont.loadFromFile("fonts/mainFont.ttf");
+
+	//set up score text
+	int score = 0;
+	sf::Text scoreText;
+	scoreText.setFont(gameFont);
+	scoreText.setString("Score: " + std::to_string(score));
+	scoreText.setCharacterSize(50);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setPosition(50, 50);
+
+
+	//set up title text
+	sf::Text titleText;
+	titleText.setFont(gameFont);
+	titleText.setString("Whack a critter!");
+	titleText.setCharacterSize(50);
+	titleText.setFillColor(sf::Color::White);
+	titleText.setPosition(gameWindow.getSize().x / 2
+		- titleText.getLocalBounds().width / 2, 30);
 
 	//----------------------------------------------------
 	//---------------=End game setup=---------------------
@@ -75,7 +98,14 @@ int main()
 		//-------------------------------------------------
 
 		//update time
+
 		sf::Time frameTime = gameClock.restart();
+
+
+		//see if there is any pending score
+		score += panda.GetPendingScore();
+		panda.ClearPendingScore();
+		scoreText.setString("Score: " + std::to_string(score));
 
 		//-------------------------------------------------
 		//--------------=End Update=-----------------------
@@ -92,6 +122,8 @@ int main()
 
 		//draw everything
 		panda.Draw(gameWindow);
+		gameWindow.draw(scoreText);
+		gameWindow.draw(titleText);
 
 		//display the window contents to the screen
 		gameWindow.display();
