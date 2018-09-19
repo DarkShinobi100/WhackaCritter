@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------
 //libraries
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 class Critter
@@ -21,6 +22,12 @@ public:
 	//Render the Critter to the target
 	void Draw(sf::RenderTarget& _target);
 
+
+	//process input on Critter
+	void input(sf::Event _gameEvent);
+
+
+
 	//-----------------------------------------------------------------
 	//-----------------------------=End behaviour=------------------------------
 	//-----------------------------------------------------------------
@@ -34,6 +41,9 @@ private:
 	sf::Sprite m_sprite;
 	//m_ means "member" of the class
 	sf::Texture m_texture;
+	bool m_alive;
+	sf::Sound m_deathsound;
+	sf::SoundBuffer m_deathBuffer;
 
 	//-----------------------------------------------------------------
 	//---------------------------=End Data=----------------------------
