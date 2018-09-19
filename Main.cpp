@@ -4,6 +4,10 @@
 //libraries
 #include <SFML/Graphics.hpp>
 
+//project inludes
+#include "Critter.h"
+
+
 
 int main()
 {
@@ -19,6 +23,9 @@ int main()
 	
 	//Timer functionality
 	sf::Clock gameClock; //game clock
+
+	//create an instance of our critter class
+	Critter panda;
 
 	//----------------------------------------------------
 	//---------------=End game setup=---------------------
@@ -70,7 +77,7 @@ int main()
 		gameWindow.clear(sf::Color::Cyan);
 
 		//draw everything
-		
+		panda.Draw(gameWindow);
 
 		//display the window contents to the screen
 		gameWindow.display();
