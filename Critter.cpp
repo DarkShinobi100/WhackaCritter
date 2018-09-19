@@ -5,6 +5,10 @@
 #include "Critter.h"
 
 
+//libraraies include
+#include <cstdlib>
+
+
 Critter::Critter()
 //initialisation list
 	: m_sprite()
@@ -14,7 +18,7 @@ Critter::Critter()
 	//set up the sprite
 	m_texture.loadFromFile("graphics/panda.png");
 	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(300, 300);
+	m_sprite.setPosition(rand()% sf::VideoMode::getDesktopMode().width, rand() % sf::VideoMode::getDesktopMode().height);
 }
 
 
