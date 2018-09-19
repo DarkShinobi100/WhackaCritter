@@ -17,14 +17,10 @@ Critter::Critter()
 	, m_deathsound()
 	, m_deathBuffer()
 	, m_pendingScore(0)
+	, m_scoreValue(1)
 
 {
-	//set up the sprite
-	m_texture.loadFromFile("graphics/panda.png");
-	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(rand()% sf::VideoMode::getDesktopMode().width, rand() % sf::VideoMode::getDesktopMode().height);
 	
-
 	//set-up the death sound
 	m_deathBuffer.loadFromFile("audio/buttonclick.ogg");
 	m_deathsound.setBuffer(m_deathBuffer);
@@ -64,7 +60,7 @@ void Critter::input(sf::Event _gameEvent)
 				m_deathsound.play();
 
 				//add to pending score
-				m_pendingScore += 1;
+				m_pendingScore += m_scoreValue;
 
 			}
 		}//end Event event statement
@@ -81,4 +77,17 @@ int Critter::GetPendingScore()
 void Critter::ClearPendingScore()
 {
 	m_pendingScore = 0;
+}
+
+//set the critter type
+void Critter::Setup(std::string _textureFile, int _pointValue)
+{
+	//set up the sprite
+	m_texture.loadFromFile(_textureFile);
+	m_sprite.setTexture(m_texture);
+	m_sprite.setPosition(rand() % sf::VideoMode::getDesktopMode().width, rand() % sf::VideoMode::getDesktopMode().height);
+
+	//set scores value dependant on image used
+	m_scoreValue = _pointValue;
+
 }

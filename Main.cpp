@@ -33,6 +33,12 @@ int main()
 
 	//create an instance of our critter class
 	Critter panda;
+	panda.Setup("graphics/panda.png",5);
+
+	//create a second instance of our critter class
+	Critter penguin;
+	penguin.Setup("graphics/penguin.png", 10);
+
 
 	//game font
 	sf::Font gameFont;
@@ -80,7 +86,7 @@ int main()
 			//process input on critters
 			panda.input(event);
 
-
+			penguin.input(event);
 
 
 			if (event.type == sf::Event::Closed)
@@ -104,7 +110,9 @@ int main()
 
 		//see if there is any pending score
 		score += panda.GetPendingScore();
+		score += penguin.GetPendingScore();
 		panda.ClearPendingScore();
+		penguin.ClearPendingScore();
 		scoreText.setString("Score: " + std::to_string(score));
 
 		//-------------------------------------------------
@@ -122,6 +130,7 @@ int main()
 
 		//draw everything
 		panda.Draw(gameWindow);
+		penguin.Draw(gameWindow);
 		gameWindow.draw(scoreText);
 		gameWindow.draw(titleText);
 

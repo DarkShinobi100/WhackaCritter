@@ -31,6 +31,9 @@ public:
 
 	//clear pending score
 	void ClearPendingScore();
+	
+	//set the critter type
+	void Setup(std::string _textureFile, int _pointValue);
 
 	//-----------------------------------------------------------------
 	//-----------------------------=End behaviour=------------------------------
@@ -49,6 +52,7 @@ private:
 	sf::Sound m_deathsound;
 	sf::SoundBuffer m_deathBuffer;
 	int m_pendingScore;
+	int m_scoreValue;
 
 	//-----------------------------------------------------------------
 	//---------------------------=End Data=----------------------------
