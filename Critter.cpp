@@ -43,21 +43,26 @@ void Critter::Draw(sf::RenderTarget& _target)
 
 
 void Critter::input(sf::Event _gameEvent)
-{ //check if the event is a click
-	if (_gameEvent.type == sf::Event::MouseButtonPressed)
+{ //only handle input if alive
+	if (m_alive == true)
 	{
-
-		//did they click on this critter?
-		if (m_sprite.getGlobalBounds().contains(_gameEvent.mouseButton.x, _gameEvent.mouseButton.y))
+		
+		//check if the event is a click
+		if (_gameEvent.type == sf::Event::MouseButtonPressed)
 		{
-			//they clicked it!
 
-			//we die
-			m_alive = false;
+			//did they click on this critter?
+			if (m_sprite.getGlobalBounds().contains(_gameEvent.mouseButton.x, _gameEvent.mouseButton.y))
+			{
+				//they clicked it!
 
-			//play the death sound
-			m_deathsound.play();
+				//we die
+				m_alive = false;
 
-		}
-	}//end Event event statement
+				//play the death sound
+				m_deathsound.play();
+
+			}
+		}//end Event event statement
+	}
 }
